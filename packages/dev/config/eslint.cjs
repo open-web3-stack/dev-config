@@ -16,7 +16,6 @@ module.exports = {
     'eslint:recommended',
     require.resolve('eslint-config-standard'),
     'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:prettier/recommended'
   ],
   overrides: [
@@ -34,6 +33,10 @@ module.exports = {
       }
     }
   ],
+  rules: {
+    'no-useless-constructore': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off'
+  },
   parser: require.resolve('@typescript-eslint/parser'),
   parserOptions: {
     extraFileExtensions: ['.cjs'],
