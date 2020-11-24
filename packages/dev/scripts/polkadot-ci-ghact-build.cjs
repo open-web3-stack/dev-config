@@ -129,15 +129,15 @@ function gitPush () {
   const version = npmGetVersion();
   let doGHRelease = false;
 
-  if (process.env.GH_RELEASE_GITHUB_API_TOKEN) {
-    const changes = fs.readFileSync('CHANGELOG.md', 'utf8');
+  // if (process.env.GH_RELEASE_GITHUB_API_TOKEN) {
+  //   const changes = fs.readFileSync('CHANGELOG.md', 'utf8');
 
-    if (changes.includes(`## ${version}`)) {
-      doGHRelease = true;
-    } else if (version.endsWith('.1')) {
-      throw new Error(`Unable to release, no CHANGELOG entry for ${version}`);
-    }
-  }
+  //   if (changes.includes(`## ${version}`)) {
+  //     doGHRelease = true;
+  //   } else if (version.endsWith('.1')) {
+  //     throw new Error(`Unable to release, no CHANGELOG entry for ${version}`);
+  //   }
+  // }
 
   execSync('git add --all .');
 
