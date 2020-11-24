@@ -20,8 +20,8 @@
     "test": "polkadot-dev-run-test --coverage"
   },
   "devDependencies": {
-    "@polkadot/dev": "workspace:packages/dev",
+    "@open-web3/dev-config": "workspace:packages/dev",
     "copyfiles": "^2.4.0"
   },
-  "version": "0.60.3"
+  "version": "0.1.0"
 }

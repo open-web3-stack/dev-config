@@ -1,5 +1,5 @@
 {
-  "extends": "@polkadot/dev/config/tsconfig.json",
+  "extends": "@open-web3/dev-config/config/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

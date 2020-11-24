@@ -1,7 +1,7 @@
 // Copyright 2017-2020 @polkadot/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-const base = require('@polkadot/dev/config/eslint.cjs');
+const base = require('@open-web3/dev-config/config/eslint.cjs');
 
 module.exports = {
   ...base,

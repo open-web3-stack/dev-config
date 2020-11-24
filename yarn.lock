@@ -1712,9 +1712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/dev@workspace:packages/dev":
+"@open-web3/dev-config@workspace:packages/dev":
   version: 0.0.0-use.local
-  resolution: "@polkadot/dev@workspace:packages/dev"
+  resolution: "@open-web3/dev-config@workspace:packages/dev"
   dependencies:
     "@babel/cli": ^7.12.1
     "@babel/core": ^7.12.3
@@ -8659,7 +8659,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@polkadot/dev": "workspace:packages/dev"
+    "@open-web3/dev-config": "workspace:packages/dev"
     copyfiles: ^2.4.0
   languageName: unknown
   linkType: soft
