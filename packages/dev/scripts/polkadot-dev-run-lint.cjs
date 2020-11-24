@@ -13,8 +13,7 @@ const argv = require('yargs')
       type: 'boolean'
     }
   })
-  .strict()
-  .argv;
+  .strict().argv;
 
 const execSync = require('./execSync.cjs');
 

@@ -18,7 +18,9 @@ execSync('git pull');
 execSync('git checkout --orphan gh-pages-temp');
 
 // ignore relevant files
-fs.writeFileSync('.gitignore', `
+fs.writeFileSync(
+  '.gitignore',
+  `
 .github/
 .vscode/
 .yarn/
@@ -28,7 +30,8 @@ node_modules/
 packages/
 test/
 NOTES.md
-`);
+`
+);
 
 // add
 execSync('git add -A');

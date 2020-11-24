@@ -17,11 +17,11 @@ const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'json', 'png', 'svg', 'd.ts']
 
 console.log('$ polkadot-dev-build-ts', process.argv.slice(2).join(' '));
 
-function buildWebpack () {
+function buildWebpack() {
   execSync('yarn polkadot-exec-webpack --config webpack.config.js --mode production');
 }
 
-async function buildBabel (dir) {
+async function buildBabel(dir) {
   const configs = CONFIGS.map((c) => path.join(process.cwd(), `../../${c}`));
   const babelConfig = configs.find((f) => fs.existsSync(f)) || configs[0];
 
@@ -43,7 +43,7 @@ async function buildBabel (dir) {
     .forEach((src) => copySync(src, 'build'));
 }
 
-async function buildJs (dir) {
+async function buildJs(dir) {
   if (!fs.existsSync(path.join(process.cwd(), '.skip-build'))) {
     const { name, version } = require(path.join(process.cwd(), './package.json'));
 
@@ -65,7 +65,7 @@ async function buildJs (dir) {
   }
 }
 
-async function main () {
+async function buildMonorepo() {
   execSync('yarn polkadot-dev-clean-build');
 
   process.chdir('packages');
@@ -85,6 +85,18 @@ async function main () {
   }
 
   process.chdir('..');
+}
+
+async function buildPolyrepo() {
+  execSync('yarn polkadot-exec-tsc --outdir ./build');
+}
+
+async function main() {
+  if (!fs.existsSync(path.join(process.cwd(), 'packages'))) {
+    buildPolyrepo();
+  } else {
+    buildMonorepo();
+  }
 }
 
 main().catch((error) => {

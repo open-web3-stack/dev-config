@@ -12,21 +12,21 @@ const execSync = require('./execSync.cjs');
 
 console.log('$ polkadot-dev-build-docs', process.argv.slice(2).join(' '));
 
-function buildTypedoc (docRoot) {
-  fs
-    .readdirSync('packages')
+function buildTypedoc(docRoot) {
+  fs.readdirSync('packages')
     .map((dir) => [path.join(process.cwd(), 'packages', dir), dir])
-    .filter(([dir]) =>
-      fs.statSync(dir).isDirectory() &&
-      fs.existsSync(path.join(dir, 'src')) &&
-      !fs.existsSync(path.join(dir, '.nodoc'))
+    .filter(
+      ([dir]) =>
+        fs.statSync(dir).isDirectory() &&
+        fs.existsSync(path.join(dir, 'src')) &&
+        !fs.existsSync(path.join(dir, '.nodoc'))
     )
     .forEach(([full, dir]) => {
       execSync(`yarn polkadot-exec-typedoc --theme markdown --out ${docRoot}/${dir} ${full}/src`);
     });
 }
 
-function main () {
+function main() {
   let docRoot = path.join(process.cwd(), 'docs');
 
   if (fs.existsSync(docRoot)) {

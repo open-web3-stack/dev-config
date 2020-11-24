@@ -7,6 +7,7 @@ module.exports = {
   ...base,
   ignorePatterns: [
     '.eslintrc.js',
+    '.eslintrc.cjs',
     '.github/**',
     '.vscode/**',
     '.yarn/**',

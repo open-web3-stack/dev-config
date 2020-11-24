@@ -14,16 +14,11 @@ if (!TYPES.includes(type)) {
   throw new Error(`Invalid version bump "${type}", expected one of ${TYPES.join(', ')}`);
 }
 
-function updateDependencies (dependencies, others, version) {
-  return Object
-    .entries(dependencies)
+function updateDependencies(dependencies, others, version) {
+  return Object.entries(dependencies)
     .sort((a, b) => a[0].localeCompare(b[0]))
     .reduce((result, [key, value]) => {
-      result[key] = others.includes(key) && value !== '*'
-        ? value.startsWith('^')
-          ? `^${version}`
-          : version
-        : value;
+      result[key] = others.includes(key) && value !== '*' ? (value.startsWith('^') ? `^${version}` : version) : value;
 
       return result;
     }, {});
@@ -47,7 +42,9 @@ if (fs.existsSync('packages')) {
     const updated = Object.keys(json).reduce((result, key) => {
       if (key === 'version') {
         result[key] = version;
-      } else if (['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'resolutions'].includes(key)) {
+      } else if (
+        ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'resolutions'].includes(key)
+      ) {
         result[key] = updateDependencies(json[key], others, version);
       } else {
         result[key] = json[key];
