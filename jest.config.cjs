@@ -4,8 +4,6 @@
 const config = require('@open-web3/dev-config/config/jest.cjs');
 
 module.exports = Object.assign({}, config, {
-  modulePathIgnorePatterns: [
-    '<rootDir>/packages/dev/build'
-  ],
+  modulePathIgnorePatterns: ['<rootDir>/packages/dev/build'],
   resolver: '@open-web3/dev-config/config/jest-resolver.cjs'
 });
