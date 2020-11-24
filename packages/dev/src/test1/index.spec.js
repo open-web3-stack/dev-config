@@ -9,8 +9,6 @@ describe('index', () => {
   });
 
   it('runs the echo function', () => {
-    expect(
-      index('something')
-    ).toEqual('something');
+    expect(index('something')).toEqual('something');
   });
 });

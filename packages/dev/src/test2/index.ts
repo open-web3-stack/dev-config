@@ -3,6 +3,4 @@
 
 import bar from './bar';
 
-export {
-  bar
-};
+export { bar };

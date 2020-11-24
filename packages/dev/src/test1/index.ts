@@ -8,10 +8,10 @@
 export default (test: string): string => test;
 
 // eslint config test
-export function blah (): void {
+export function blah(): void {
   console.log('123');
 }
 
-export function adder (a: number, b: number): number {
+export function adder(a: number, b: number): number {
   return a + b;
 }

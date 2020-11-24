@@ -12,6 +12,6 @@ import * as pkg from '../package.json';
  * test(); // => nothing
  * ```
  */
-export function test (): void {
+export function test(): void {
   console.log(pkg.version);
 }

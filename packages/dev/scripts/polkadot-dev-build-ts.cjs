@@ -47,9 +47,9 @@ async function buildJs (dir) {
   if (!fs.existsSync(path.join(process.cwd(), '.skip-build'))) {
     const { name, version } = require(path.join(process.cwd(), './package.json'));
 
-    if (!name.startsWith('@polkadot/')) {
-      return;
-    }
+    // if (!name.startsWith('@polkadot/')) {
+    //   return;
+    // }
 
     console.log(`*** ${name} ${version}`);
 

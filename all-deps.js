@@ -8,34 +8,32 @@ const path = require('path');
 const versions = {};
 const paths = [];
 
-function packageJson (dir) {
+function packageJson(dir) {
   return path.join(dir, 'package.json');
 }
 
-function updateDependencies (dependencies) {
-  return Object.keys(dependencies).sort().reduce((result, name) => {
-    const current = dependencies[name];
-    const version = current[0] !== '^'
-      ? current
-      : versions[name] || current;
+function updateDependencies(dependencies) {
+  return Object.keys(dependencies)
+    .sort()
+    .reduce((result, name) => {
+      const current = dependencies[name];
+      const version = current[0] !== '^' ? current : versions[name] || current;
 
-    if (version !== current) {
-      console.log('\t\t', name, '->', version);
-    }
+      if (version !== current) {
+        console.log('\t\t', name, '->', version);
+      }
 
-    result[name] = version;
+      result[name] = version;
 
-    return result;
-  }, {});
+      return result;
+    }, {});
 }
 
-function parsePackage (dir) {
-  return JSON.parse(
-    fs.readFileSync(packageJson(dir)).toString('utf-8')
-  );
+function parsePackage(dir) {
+  return JSON.parse(fs.readFileSync(packageJson(dir)).toString('utf-8'));
 }
 
-function updatePackage (dir) {
+function updatePackage(dir) {
   console.log('\t', dir);
 
   const json = parsePackage(dir);
@@ -52,7 +50,7 @@ function updatePackage (dir) {
   fs.writeFileSync(packageJson(dir), `${JSON.stringify(result, null, 2)}\n`);
 }
 
-function extractVersion (dir) {
+function extractVersion(dir) {
   console.log('\t', dir);
 
   const { name, version } = parsePackage(dir);
@@ -60,7 +58,7 @@ function extractVersion (dir) {
   versions[name] = `^${version}`;
 }
 
-function findPackages (dir) {
+function findPackages(dir) {
   const pkgsDir = path.join(dir, 'packages');
 
   paths.push(dir);
@@ -70,14 +68,15 @@ function findPackages (dir) {
     return;
   }
 
-  fs
-    .readdirSync(pkgsDir)
+  fs.readdirSync(pkgsDir)
     .filter((entry) => {
       const full = path.join(pkgsDir, entry);
 
-      return !['.', '..'].includes(entry) &&
+      return (
+        !['.', '..'].includes(entry) &&
         fs.lstatSync(full).isDirectory() &&
-        fs.existsSync(path.join(full, 'package.json'));
+        fs.existsSync(path.join(full, 'package.json'))
+      );
     })
     .forEach((dir) => {
       const full = path.join(pkgsDir, dir);
@@ -88,8 +87,7 @@ function findPackages (dir) {
 }
 
 console.log('Extracting');
-fs
-  .readdirSync('.')
+fs.readdirSync('.')
   .filter((name) => {
     return !['.', '..'].includes(name) && fs.existsSync(packageJson(name));
   })

@@ -5,8 +5,6 @@ import { echo } from '.';
 
 describe('index', () => {
   it('runs the echo function', () => {
-    expect(
-      echo('something')
-    ).toEqual('1: 123: something');
+    expect(echo('something')).toEqual('1: 123: something');
   });
 });
