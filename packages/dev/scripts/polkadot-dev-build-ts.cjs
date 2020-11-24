@@ -89,6 +89,8 @@ async function buildMonorepo() {
 
 async function buildPolyrepo() {
   execSync('yarn polkadot-exec-tsc --outdir ./build');
+
+  [...CPX].forEach((src) => copySync(src, './build'));
 }
 
 async function main() {
