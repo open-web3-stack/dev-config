@@ -5,8 +5,6 @@
 /* eslint-disable sort-keys */
 
 require('@rushstack/eslint-patch/modern-module-resolution');
-require('@typescript-eslint/eslint-plugin')
-require('eslint-plugin-prettier')
 
 module.exports = {
   env: {
@@ -36,6 +34,7 @@ module.exports = {
     }
   ],
   rules: {
+    'prettier/prettier': 'error',
     'no-useless-constructor': 'off',
     'no-use-before-define': 'off',
     'prefer-promise-reject-errors': 'warn',
@@ -49,7 +48,7 @@ module.exports = {
     extraFileExtensions: ['.cjs'],
     warnOnUnsupportedTypeScriptVersion: false
   },
-  plugins: ['@typescript-eslint', 'header', 'import'],
+  plugins: ['@typescript-eslint', 'header', 'import', 'prettier'],
   settings: {
     'import/extensions': ['.js', '.ts', '.tsx'],
     'import/parsers': {
