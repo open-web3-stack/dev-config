@@ -5,6 +5,8 @@
 /* eslint-disable sort-keys */
 
 require('@rushstack/eslint-patch/modern-module-resolution');
+require('@typescript-eslint/eslint-plugin')
+require('eslint-plugin-prettier')
 
 module.exports = {
   env: {
@@ -35,10 +37,12 @@ module.exports = {
   ],
   rules: {
     'no-useless-constructor': 'off',
+    'no-use-before-define': 'off',
     'prefer-promise-reject-errors': 'warn',
     '@typescript-eslint/no-unsafe-assignment': 'warn',
     '@typescript-eslint/no-unsafe-member-access': 'warn',
     '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/no-use-before-define': ['error']
   },
   parser: require.resolve('@typescript-eslint/parser'),
   parserOptions: {
