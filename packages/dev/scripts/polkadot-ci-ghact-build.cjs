@@ -1,11 +1,10 @@
 #!/usr/bin/env node
-// Copyright 2017-2020 @polkadot/dev authors & contributors
+// Copyright 2017-2021 @polkadot/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 const os = require('os');
 const path = require('path');
 const fs = require('fs');
-const rimraf = require('rimraf');
 const argv = require('yargs')
   .options({
     'skip-beta': {
@@ -59,8 +58,9 @@ function npmPublish() {
     return;
   }
 
-  rimraf.sync('build/package.json');
-  ['LICENSE', 'README.md', 'package.json'].forEach((file) => copySync(file, 'build'));
+  ['LICENSE', 'package.json']
+    .filter((file) => !fs.existsSync(path.join(process.cwd(), 'build', file)))
+    .forEach((file) => copySync(file, 'build'));
 
   process.chdir('build');
 
@@ -102,21 +102,20 @@ function gitBump() {
   const [version, tag] = currentVersion.split('-');
   const [, , patch] = version.split('.');
 
-  if (tag) {
-    // if we have a beta version, just continue the stream of betas
-    execSync('yarn polkadot-dev-version pre');
-  } else if (argv['skip-beta']) {
+  if (argv['skip-beta'] || patch === '0') {
     // don't allow beta versions
     execSync('yarn polkadot-dev-version patch');
-  } else if (patch === '0') {
-    // patch is .0, so publish this as an actual release (surely we did our job on beta)
-    execSync('yarn polkadot-dev-version patch');
-  } else if (patch === '1') {
-    // continue with first new minor as beta
-    execSync('yarn polkadot-dev-version pre');
   } else {
-    // manual setting of version, make some changes so we can commit
-    fs.appendFileSync(path.join(process.cwd(), '.123trigger'), currentVersion);
+    const triggerPath = path.join(process.cwd(), '.123trigger');
+    const available = fs.readFileSync(triggerPath, 'utf-8').split('\n');
+
+    if (tag || patch === '1' || available.includes(currentVersion)) {
+      // if we have a beta version, just continue the stream of betas
+      execSync('yarn polkadot-dev-version pre');
+    } else {
+      // manual setting of version, make some changes so we can commit
+      fs.appendFileSync(triggerPath, `\n${currentVersion}`);
+    }
   }
 
   execSync('git add --all .');
@@ -144,8 +143,6 @@ function gitPush() {
 
   // add the skip checks for GitHub ...
   execSync(`git commit --no-status --quiet -m "[CI Skip] release/${version.includes('-') ? 'beta' : 'stable'} ${version}
-
-
 skip-checks: true"`);
 
   execSync(`git push ${repo} HEAD:${process.env.GITHUB_REF}`, true);
