@@ -7,9 +7,9 @@
 module.exports = function () {
   return {
     visitor: {
-      Program (programPath) {
+      Program(programPath) {
         programPath.traverse({
-          ArrowFunctionExpression (path) {
+          ArrowFunctionExpression(path) {
             const node = path.node;
 
             node.expression = node.body.type !== 'BlockStatement';

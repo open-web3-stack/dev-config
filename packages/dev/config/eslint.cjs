@@ -20,7 +20,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['*.js', '*.spec.js', '*.cjs', '*.mjs'],
+      files: ['*.js', '*.cjs', '*.mjs'],
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-var-requires': 'off',
@@ -28,6 +28,7 @@ module.exports = {
         '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/ban-ts-comment': 'warn',
         '@typescript-eslint/restrict-plus-operands': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off'
       }
@@ -39,13 +40,11 @@ module.exports = {
     'no-use-before-define': 'off',
     'prefer-promise-reject-errors': 'warn',
     '@typescript-eslint/no-unsafe-assignment': 'warn',
-    '@typescript-eslint/no-unsafe-member-access': 'warn',
-    '@typescript-eslint/ban-ts-comment': 'warn',
-    '@typescript-eslint/no-use-before-define': ['error']
+    '@typescript-eslint/no-unsafe-member-access': 'warn'
   },
   parser: require.resolve('@typescript-eslint/parser'),
   parserOptions: {
-    extraFileExtensions: ['.cjs'],
+    extraFileExtensions: ['.cjs', '.mjs'],
     warnOnUnsupportedTypeScriptVersion: false
   },
   plugins: ['@typescript-eslint', 'header', 'import', 'prettier'],

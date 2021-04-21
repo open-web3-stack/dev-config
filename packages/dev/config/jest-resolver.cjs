@@ -3,7 +3,7 @@
 
 const path = require('path');
 
-module.exports = function resolver (file, config) {
+module.exports = function resolver(file, config) {
   return file.includes('package.json')
     ? path.join(config.basedir.replace('/src', '/'), file)
     : config.defaultResolver(file, config);

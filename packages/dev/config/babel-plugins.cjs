@@ -23,10 +23,14 @@ module.exports = function (dstExtension) {
     // Under Jest the conversion of paths leads to issues since the require would be from e.g.
     // 'index.js', but while executing only the 'index.ts' file would be available (However, in
     // the case of ESM transforms we do need the explicit extension here, so apply it)
-    dstExtension && process.env.NODE_ENV !== 'test' && ['babel-plugin-module-extension-resolver', {
-      dstExtension,
-      srcExtensions: ['.ts', '.tsx']
-    }]
+    dstExtension &&
+      process.env.NODE_ENV !== 'test' && [
+        'babel-plugin-module-extension-resolver',
+        {
+          dstExtension,
+          srcExtensions: ['.ts', '.tsx']
+        }
+      ]
     // This is/was needed for older versions, actually not sure if it is still applicable
     // anymore, since we actually ignored the flag anyway (and don't ship reports by default)
     // process.env.NODE_ENV === 'test' && '@polkadot/dev/config/babel-plugin-fix-istanbul.cjs',
