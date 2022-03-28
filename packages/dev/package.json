@@ -1,6 +1,6 @@
 {
   "name": "@open-web3/dev-config",
-  "version": "0.1.14",
+  "version": "0.2.1",
   "type": "commonjs",
   "description": "A collection of shared CI scripts and development environment used by @polkadot projects",
   "bin": {
