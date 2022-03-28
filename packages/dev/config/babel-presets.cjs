@@ -16,6 +16,7 @@ module.exports = function (modules) {
       '@babel/preset-env',
       {
         modules,
+        loose: true,
         targets: {
           browsers: '>0.25% and last 2 versions and not ie 11 and not OperaMini all',
           node: '12'

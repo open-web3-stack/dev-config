@@ -2,12 +2,14 @@
 // Copyright 2017-2020 @polkadot/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-console.log('$ gh-pages', process.argv.slice(2).join(' '));
+const { importRelative } = require('./import.cjs');
 
-require('gh-pages/bin/gh-pages')(process.argv)
+importRelative(
+  'gh-pages',
+  'gh-pages/bin/gh-pages.js'
+)(process.argv)
   .then(() => {
     process.stdout.write('Published\n');
+    process.exit(0);
   })
-  .catch((error) => {
-    process.stderr.write(`${error.message}\n`, () => process.exit(1));
-  });
+  .catch(() => process.exit(1));

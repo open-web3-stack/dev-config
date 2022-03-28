@@ -2,6 +2,6 @@
 // Copyright 2017-2020 @polkadot/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-console.log('$ gh-release', process.argv.slice(2).join(' '));
+const { importRelative } = require('./import.cjs');
 
-require('gh-release/bin/cli');
+importRelative('gh-release', 'gh-release/bin/cli.js');
