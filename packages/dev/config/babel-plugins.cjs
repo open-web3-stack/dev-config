@@ -10,6 +10,7 @@ module.exports = function (dstExtension) {
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     ['@babel/plugin-proposal-pipeline-operator', { proposal: 'fsharp' }],
     ['@babel/plugin-proposal-private-methods', { loose: true }],
+    ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
     '@babel/plugin-proposal-nullish-coalescing-operator',
     '@babel/plugin-proposal-numeric-separator',
     '@babel/plugin-proposal-object-rest-spread',
