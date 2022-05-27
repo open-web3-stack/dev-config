@@ -38,10 +38,10 @@ function updatePackage(dir) {
 
   const json = parsePackage(dir);
   const result = Object.keys(json).reduce((result, key) => {
-    if (!['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'resolutions'].includes(key)) {
-      result[key] = json[key];
-    } else {
+    if (['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'resolutions'].includes(key)) {
       result[key] = updateDependencies(json[key]);
+    } else if(key !== 'stableVersion') {
+      result[key] = json[key];
     }
 
     return result;
