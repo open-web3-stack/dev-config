@@ -40,7 +40,7 @@ function updatePackage(dir) {
   const result = Object.keys(json).reduce((result, key) => {
     if (['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'resolutions'].includes(key)) {
       result[key] = updateDependencies(json[key]);
-    } else if(key !== 'stableVersion') {
+    } else if (key !== 'stableVersion') {
       result[key] = json[key];
     }
 
